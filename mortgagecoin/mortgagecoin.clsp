@@ -1,0 +1,54 @@
+(mod
+    (
+        TIME_TO_PAY ; curry
+        MORTGAGE_AMOUNT ; curry
+        MORTGAGE_EXECUTION_PUZZLE ; curry
+        DEBTOR_PUZZLE ; curry
+        AMOUNT_TO_PAID ; curry
+        my_amount
+        new_amount
+        my_puzzlehash
+    )
+
+    (include "condition_codes.clib")
+
+    (defun-inline paytocreditor (MORTGAGE_EXECUTION_PUZZLE new_amount)
+        ; execute the loan
+        (list CREATE_COIN MORTGAGE_EXECUTION_PUZZLE new_amount)
+        
+    )
+
+    (defun-inline givebackmortgage (DEBTOR_PUZZLE new_amount)
+        ; give back the mortgage
+        (list CREATE_COIN DEBTOR_PUZZLE new_amount)
+    )
+
+    (defun-inline recreate_with_deposit (my_amount new_amount my_puzzlehash)
+        ; recreate the mortgage with a new deposit
+        (list
+            (list CREATE_COIN my_puzzlehash new_amount)
+            (list ASSERT_MY_AMOUNT my_amount)
+            (list ASSERT_MY_PUZZLEHASH my_puzzlehash)
+            (list CREATE_COIN_ANNOUNCEMENT new_amount)
+        )
+    )
+
+    (if (> ASSERT_SECONDS_RELATIVE TIME_TO_PAY)
+        ; Mortgage execution :(
+        (paytocreditor MORTGAGE_EXECUTION_PUZZLE new_amount)
+        
+        ; Pay is possible :) check if the debtor pay the entire amount
+        (if (= new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT))
+            (givebackmortgage DEBTOR_PUZZLE new_amount)
+            
+            ; Maybe is more, check it
+            (if (> new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT))
+                (givebackmortgage DEBTOR_PUZZLE new_amount)
+                
+                ; its not but the debtor is making a payment
+                (recreate_with_deposit my_amount new_amount my_puzzlehash)            
+            )
+        )
+    )
+        
+)
