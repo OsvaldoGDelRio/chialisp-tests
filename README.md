@@ -16,3 +16,10 @@ Trying:
 3. Bob can make payments and the coin recreates itself.
 
 4. If the same amount as the mortgage and payment (+ MORTGAGE_AMOUNT AMOUNT_TO_PAID) is deposited before the due date, the mortgage is returned and the fee payment is executed.
+
+### loops
+
+Trying:
+
+1. Iterate lists
+2. Recursion

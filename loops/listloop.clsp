@@ -1,0 +1,11 @@
+( ; trying retrive element by element in a list
+    (defun listloop (givenlist)
+    (if givenlist
+      (list 
+        (f givenlist) 
+        (listloop (r givenlist))
+      )
+      givenlist  
+    )
+  )
+)
