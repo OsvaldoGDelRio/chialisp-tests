@@ -1,4 +1,5 @@
 (mod
+    ; input values
     (
         TIME_TO_PAY ; curry
         MORTGAGE_AMOUNT ; curry
@@ -10,7 +11,10 @@
         my_puzzlehash
     )
 
+    ; includes
     (include "condition_codes.clib")
+
+    ; functions
 
     (defun-inline paytocreditor (MORTGAGE_EXECUTION_PUZZLE new_amount)
         ; execute the loan
@@ -21,35 +25,37 @@
     (defun-inline givebackmortgage (DEBTOR_PUZZLE MORTGAGE_AMOUNT)
         ; give back the mortgage and pay de extra to the creditor
         (list
-            (list CREATE_COIN DEBTOR_PUZZLE MORTGAGE_AMOUNT)
-            (list CREATE_COIN MORTGAGE_EXECUTION_PUZZLE (- new_amount MORTGAGE_AMOUNT))
+            (list CREATE_COIN DEBTOR_PUZZLE MORTGAGE_AMOUNT) ; give back the mortgage
+            (list CREATE_COIN MORTGAGE_EXECUTION_PUZZLE (- new_amount MORTGAGE_AMOUNT)) ; pay the extra to creditor
         )
     )
 
     (defun-inline recreate_with_deposit (my_amount new_amount my_puzzlehash)
         ; recreate the mortgage with a new deposit
         (list
-            (list CREATE_COIN my_puzzlehash new_amount)
-            (list ASSERT_MY_AMOUNT my_amount)
-            (list ASSERT_MY_PUZZLEHASH my_puzzlehash)
+            (list CREATE_COIN my_puzzlehash new_amount) ; recreate the mortgage
+            (list ASSERT_MY_AMOUNT my_amount) ; assert the new amount
+            (list ASSERT_MY_PUZZLEHASH my_puzzlehash) 
             (list CREATE_COIN_ANNOUNCEMENT new_amount)
         )
     )
 
-    (if (> ASSERT_SECONDS_RELATIVE TIME_TO_PAY)
+    ; main
+
+    (if (> ASSERT_SECONDS_RELATIVE TIME_TO_PAY) ; if the time to pay is over
         ; Mortgage execution :(
         (paytocreditor MORTGAGE_EXECUTION_PUZZLE new_amount)
         
         ; Pay is possible :) check if the debtor pay the entire amount
-        (if (= new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT))
-            (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT)
+        (if (= new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT)) ; if the debtor pay the entire amount exactly
+            (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT) ; give back the mortgage and pay the extra to the creditor
             
             ; Maybe is more, check it
-            (if (> new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT))
-                (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT)
+            (if (> new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT)) ; if the debtor pay more than the amount to pay
+                (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT) ; give back the mortgage and pay the extra to the creditor
                 
                 ; its not but the debtor is making a payment
-                (recreate_with_deposit my_amount new_amount my_puzzlehash)            
+                (recreate_with_deposit my_amount new_amount my_puzzlehash) ; recreate the mortgage with a new deposit           
             )
         )
     )

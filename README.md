@@ -1,5 +1,9 @@
-# chialisp
+# Chialisp
 Learning and practice with ChiaLisp
+[Mortgage Coin Case](https://github.com/OsvaldoGDelRio/chialisp-tests#mortgagecoin)
+[Loops and recursion](https://github.com/OsvaldoGDelRio/chialisp-tests#loops)
+
+
 
 ## READ FIRST
 
