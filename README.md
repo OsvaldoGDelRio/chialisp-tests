@@ -5,7 +5,7 @@ Learning and practice with ChiaLisp
 
 This is not a tutorial, I am learning, I do not recommend trying to create these coins, unless it is in test environment, like Testnet 
 
-### Mortgage Coin
+### mortgagecoin
 
 Trying:
 
