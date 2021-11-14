@@ -21,6 +21,20 @@ Trying:
 
 4. If the same amount as the mortgage and payment (+ MORTGAGE_AMOUNT AMOUNT_TO_PAID) is deposited before the due date, the mortgage is returned and the fee payment is executed.
 
+run results
+```
+(a (q 2 (i (> 10 5) (q 4 22 (c 23 (c 383 ()))) (q 2 (i (= 383 (+ 95 11)) (q 4 (c 22 (c 47 (c 11 ()))) (c (c 22 (c 23 (c (- 383 11) ()))) ())) (q 2 (i (> 383 (+ 95 11)) (q 4 (c 22 (c 47 (c 11 ()))) (c (c 22 (c 23 (c (- 383 11) ()))) ())) (q 4 (c 22 (c 767 (c 383 ()))) (c (c 8 (c -65 ())) (c (c 12 (c 767 ())) (c (c 30 (c 383 ())) ()))))) 1)) 1)) 1) (c (q (73 . 72) 80 51 . 60) 1))
+```
+
+solution
+```
+(600 10000 0xa11ce 0x426f62 100 0 0 0xcaf33f00d)
+```
+brun
+```
+((51 0x0caf33f00d ()) (73 ()) (72 0x0caf33f00d) (60 ()))
+```
+
 ### loops
 
 Trying:
