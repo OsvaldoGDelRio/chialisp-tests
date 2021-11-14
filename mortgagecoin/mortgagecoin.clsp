@@ -18,9 +18,9 @@
         
     )
 
-    (defun-inline givebackmortgage (DEBTOR_PUZZLE new_amount)
+    (defun-inline givebackmortgage (DEBTOR_PUZZLE MORTGAGE_AMOUNT)
         ; give back the mortgage
-        (list CREATE_COIN DEBTOR_PUZZLE new_amount)
+        (list CREATE_COIN DEBTOR_PUZZLE MORTGAGE_AMOUNT)
     )
 
     (defun-inline recreate_with_deposit (my_amount new_amount my_puzzlehash)
@@ -39,11 +39,11 @@
         
         ; Pay is possible :) check if the debtor pay the entire amount
         (if (= new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT))
-            (givebackmortgage DEBTOR_PUZZLE new_amount)
+            (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT)
             
             ; Maybe is more, check it
             (if (> new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT))
-                (givebackmortgage DEBTOR_PUZZLE new_amount)
+                (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT)
                 
                 ; its not but the debtor is making a payment
                 (recreate_with_deposit my_amount new_amount my_puzzlehash)            
