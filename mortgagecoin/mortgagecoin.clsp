@@ -22,7 +22,7 @@
         
     )
 
-    (defun-inline givebackmortgage (DEBTOR_PUZZLE MORTGAGE_AMOUNT)
+    (defun-inline givebackmortgage (DEBTOR_PUZZLE MORTGAGE_AMOUNT MORTGAGE_EXECUTION_PUZZLE new_amount)
         ; give back the mortgage and pay de extra to the creditor
         (list
             (list CREATE_COIN DEBTOR_PUZZLE MORTGAGE_AMOUNT) ; give back the mortgage
@@ -48,11 +48,11 @@
         
         ; Pay is possible :) check if the debtor pay the entire amount
         (if (= new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT)) ; if the debtor pay the entire amount exactly
-            (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT) ; give back the mortgage and pay the extra to the creditor
+            (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT MORTGAGE_EXECUTION_PUZZLE new_amount) ; give back the mortgage and pay the extra to the creditor
             
             ; Maybe is more, check it
             (if (> new_amount (+ AMOUNT_TO_PAID MORTGAGE_AMOUNT)) ; if the debtor pay more than the amount to pay
-                (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT) ; give back the mortgage and pay the extra to the creditor
+                (givebackmortgage DEBTOR_PUZZLE MORTGAGE_AMOUNT MORTGAGE_EXECUTION_PUZZLE new_amount) ; give back the mortgage and pay the extra to the creditor
                 
                 ; its not but the debtor is making a payment
                 (recreate_with_deposit my_amount new_amount my_puzzlehash) ; recreate the mortgage with a new deposit           
