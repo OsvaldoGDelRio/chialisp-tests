@@ -19,8 +19,11 @@
     )
 
     (defun-inline givebackmortgage (DEBTOR_PUZZLE MORTGAGE_AMOUNT)
-        ; give back the mortgage
-        (list CREATE_COIN DEBTOR_PUZZLE MORTGAGE_AMOUNT)
+        ; give back the mortgage and pay de extra to the creditor
+        (list
+            (list CREATE_COIN DEBTOR_PUZZLE MORTGAGE_AMOUNT)
+            (list CREATE_COIN MORTGAGE_EXECUTION_PUZZLE (- new_amount MORTGAGE_AMOUNT))
+        )
     )
 
     (defun-inline recreate_with_deposit (my_amount new_amount my_puzzlehash)
