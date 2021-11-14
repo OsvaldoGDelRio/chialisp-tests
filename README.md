@@ -29,11 +29,13 @@ run results
 solution
 ```
 (600 10000 0xa11ce 0x426f62 100 0 0 0xcaf33f00d)
+; TIME_TO_PAY MORTGAGE_AMOUNT MORTGAGE_EXECUTION_PUZZLE DEBTOR_PUZZLE AMOUNT_TO_PAID my_amount new_amount my_puzzlehash
 ```
 brun
 ```
 ((51 0x0caf33f00d ()) (73 ()) (72 0x0caf33f00d) (60 ()))
 ```
+
 
 ### loops
 
@@ -41,3 +43,9 @@ Trying:
 
 1. Iterate lists
 2. Recursion
+
+### To consider
+
+The more calculations, operations and functions that are done in the program, the more cost is added, for the moment I am not considering the cost, only exploring the functionality and the limits.
+
+Although, if one of the advantages of being able to program a currency / contract is that its behavior can be delimited, why leave functions out of the same currency? that will depend on each purpose and case. 
