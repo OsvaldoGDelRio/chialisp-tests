@@ -1,6 +1,10 @@
 # Chialisp
 Learning and practice with ChiaLisp
+
 [Mortgage Coin Case](https://github.com/OsvaldoGDelRio/chialisp-tests#mortgagecoin)
+
+[Elections](https://github.com/OsvaldoGDelRio/chialisp-tests#elections)
+
 [Loops and recursion](https://github.com/OsvaldoGDelRio/chialisp-tests#loops)
 
 
@@ -35,7 +39,19 @@ brun
 ```
 ((51 0x0caf33f00d ()) (73 ()) (72 0x0caf33f00d) (60 ()))
 ```
+### elections
 
+Trying:
+
+1. A contract / coin (organization) that creates one coin for each voter and one for each candidate.
+
+2. Candidates can only receive a maximum number of mojos exact to the number of voters.
+
+3. Voters can only receive 1 mojo, considering 1 mojo 1 vote.
+
+4. Candidates can only receive the mojo if it comes from a valid voter (valid puzzle_hash).
+
+5. Voters can only vote if the time to vote has not passed, just as candidates can only be voted if the time has not passed.
 
 ### loops
 

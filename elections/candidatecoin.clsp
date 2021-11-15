@@ -1,0 +1,37 @@
+(mod
+    ;inputs
+    (
+        MAX_TIME_TO_VOTE
+        LIST_CANDIDATES_PUZZLE
+        puzzle_candidate    
+    )
+
+    ;include
+
+    (include "condition_codes.clib")
+
+    ;functions
+    (defun-inline (puzzle_candidate)
+        ()        
+    )
+
+    (defun checkifthepuzzleisvalid (puzzle_candidate LIST_CANDIDATES_PUZZLE)
+        ()    
+    )
+
+    ;main
+    ;check if its not passed the time to vote
+    (if (< ASSERT_SECONDS_RELATIVE MAX_TIME_TO_VOTE)
+        ; its time to vote
+        ; check if the puzzle is a valide candidate
+        (if (checkifthepuzzleisvalid puzzle_candidate LIST_CANDIDATES_PUZZLE)
+            ; its valid, make the vote
+            (vote puzzle_candidate)
+            ; its not valid, do nothing
+            (x)
+        )
+        ; not anymore
+        (x)
+        
+    )
+)

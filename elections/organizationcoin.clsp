@@ -1,0 +1,49 @@
+(mod
+    ; inputs
+    (
+        VOTER_VALUE_COIN ; curry
+        CANDIDATE_VALUE_COIN ; curry
+        listofvoterspuzzle ; list
+        listofcandidatespuzzle ; list
+        number_of_voters ; int
+        number_of_candidates ; int
+        new_amount ; int mojo
+        my_puzzlehash
+    )
+
+    ; includes
+
+    ; functions
+    
+    (defun createvoterscoins (listofvoterspuzzle)
+        ()
+    )
+
+    (defun createcandidatescoins (listofcandidatespuzzle)
+        ()
+    )
+
+    ;main
+
+    ; check if the number of voters is greater than 1
+    (if (> number_of_voters 1)
+        ; is greater than 1, then we can proceed
+        ; check if the number of candidates is greater than 1
+        ( if (> number_of_candidates 1)
+            ; check if the amount is enough to all voters, 1 mojo to 1 voter
+            (if(= new_amount number_of_voters)
+                ; is enough, then we can proceed
+                (list
+                    (createvoterscoins listofvoterspuzzle)
+                    (createcandidatescoins listofcandidatespuzzle)
+                )
+                ; is not
+                (x)
+            )
+            ; is not
+            (x)
+        )
+        ; its not greater than 1
+        (x)
+    )
+)
