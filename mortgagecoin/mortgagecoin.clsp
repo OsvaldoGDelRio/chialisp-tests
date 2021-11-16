@@ -42,7 +42,7 @@
 
     ; main
 
-    (if (> ASSERT_SECONDS_RELATIVE TIME_TO_PAY) ; if the time to pay is over
+    (if (ASSERT_SECONDS_RELATIVE TIME_TO_PAY) ; if the time to pay is over
         ; Mortgage execution :(
         (paytocreditor MORTGAGE_EXECUTION_PUZZLE new_amount)
         
